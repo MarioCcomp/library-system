@@ -8,8 +8,45 @@ const Login = () => {
 
     const [registerScreen, setRegisterScreen] = useState(false);
 
+
+    const [emailInputValue, setEmailInputValue] = useState('');
+    const [userInputValue, setUserInputValue] = useState('');
+    const [passwordInputValue, setPasswordInputValue] = useState('')
+
     const toggleRegisterScreen = () => {
         setRegisterScreen(!registerScreen);
+    }
+
+
+    const registerUser = async (user) => {
+
+        const response = await fetch('http://localhost:8080/user/registrar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
+
+        if (!response.ok) {
+           console.log("deu erro");
+        }
+
+         const data = await response.json();
+         console.log(data);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const user = {
+            name: userInputValue,
+            email: emailInputValue,
+            password: passwordInputValue
+        }
+
+        registerUser(user);
+
     }
 
   return (
@@ -31,10 +68,10 @@ const Login = () => {
             <div className="header">
                 <h2>Faça seu Registro</h2>
             </div>
-            <form>
-                <input type="text" placeholder='Digite seu email'/>
-                <input type="text" placeholder='Digite seu usuario'/>
-                <input type="text" placeholder='Digite sua senha'/>
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder='Digite seu email'  value={emailInputValue} onChange={(e) => setEmailInputValue(e.target.value)}/>
+                <input type="text" placeholder='Digite seu usuario'  value={userInputValue} onChange={(e) => setUserInputValue(e.target.value)}/>
+                <input type="text" placeholder='Digite sua senha'  value={passwordInputValue} onChange={(e) => setPasswordInputValue(e.target.value)}/>
                 <input type="submit" value='Registrar'/>
             </form>
             <p>Já possui uma conta? <span onClick={toggleRegisterScreen}>Faça login</span></p>
