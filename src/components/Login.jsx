@@ -32,6 +32,35 @@ const Login = () => {
          console.log(data);
     }
 
+    const onLogin = async (e) => {
+
+        e.preventDefault();
+
+
+        const user = {
+            id: 1,
+            name: "Mario",
+            email: "mario@gmail.com",
+            password: "123"
+        }
+
+        const response = await fetch('http://localhost:8080/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
+
+        if (!response.ok) {
+           console.log("deu erro");
+        }
+
+         const data = await response.json();
+         console.log(data.books[0]);
+
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -53,7 +82,7 @@ const Login = () => {
           <div className="header">
             <h2>Faça seu Login</h2>
           </div>
-          <form>
+          <form onSubmit={onLogin}>
             <input type="text" placeholder='Digite seu nome de usuario' />
             <input type="text" placeholder='Digite sua senha' />
             <input type="submit" value='Entrar' />
