@@ -1,0 +1,63 @@
+#mainLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.blockLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #000;
+    min-width: 20%;
+    min-height: 50%;
+    gap: 2rem;
+}
+
+.header {
+    max-height: 10%;
+}
+
+.header h2 {
+    font-size: 2.7rem;
+}
+
+
+
+
+.blockLogin form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    min-height: 60%;
+}
+
+
+.blockLogin form input {
+    padding: .5rem 1rem;
+}
+
+.blockLogin form input:last-of-type {
+    border-radius: .7rem;
+    background-color: rgb(100, 100, 185);
+    color: #fdfdfd;
+    opacity: .7;
+    cursor: pointer;
+    border: 1px solid #000;
+    margin-top: .8rem;
+}
+
+.blockLogin form input:last-of-type:hover {
+    opacity: 1;
+}
+
+span {
+    color: rgb(24, 11, 139);
+    font-weight: bold;
+    cursor: pointer;
+}
