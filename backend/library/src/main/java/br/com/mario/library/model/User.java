@@ -1,6 +1,7 @@
 package br.com.mario.library.model;
 
 
+import br.com.mario.library.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,28 +32,26 @@ public class User {
     @NotBlank
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+
 
     @ManyToMany
     private List<Book> books = new ArrayList<>();;
 
 
-    public User(Long id, String name, String email, String password, List<Book> books) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.books = books;
-    }
 
     public User() {
     }
 
 
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
+    public User(Long id, String name, String email, String password, Role role, List<Book> books) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
         this.books = books;
     }
 
@@ -86,5 +85,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

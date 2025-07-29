@@ -3,10 +3,12 @@ package br.com.mario.library.service;
 
 import br.com.mario.library.dto.BookDTO;
 import br.com.mario.library.dto.LoginDTO;
+import br.com.mario.library.dto.UserDTO;
 import br.com.mario.library.exception.WrongPasswordException;
 import br.com.mario.library.model.Book;
 import br.com.mario.library.model.User;
 import br.com.mario.library.repository.UserRepository;
+import br.com.mario.library.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ import java.util.List;
 @Service
 public class UserService {
 
+
+    @Autowired
+    private JwtService jwtService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -60,12 +65,17 @@ public class UserService {
         return repository.save(user);
     }
 
-    public User logar(LoginDTO user) {
+    public UserDTO logar(LoginDTO user) {
         User banco = repository.findByName(user.name()).orElseThrow(() -> new RuntimeException("Usuario nao encontrado"));
         if (!(passwordEncoder.matches(user.password(), banco.getPassword()))) {
             throw new WrongPasswordException();
         }
-        return banco;
+
+        String token = jwtService.generateToken(banco.getName(), banco.getRole().name());
+
+        UserDTO newUser = new UserDTO(banco.getName(), banco.getEmail(), banco.getBooks(), token);
+
+        return newUser;
 
     }
 
