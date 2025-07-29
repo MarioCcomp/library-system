@@ -8,6 +8,7 @@ const Login = () => {
     const [emailInputValue, setEmailInputValue] = useState('');
     const [userInputValue, setUserInputValue] = useState('');
     const [passwordInputValue, setPasswordInputValue] = useState('')
+    const [showPassword, setShowPassword] = useState (false);
 
     const toggleRegisterScreen = () => {
         setRegisterScreen(!registerScreen);
@@ -84,7 +85,7 @@ const Login = () => {
           </div>
           <form onSubmit={onLogin}>
             <input type="text" placeholder='Digite seu nome de usuario' />
-            <input type="text" placeholder='Digite sua senha' />
+            <input type="password" placeholder='Digite sua senha' />
             <input type="submit" value='Entrar' />
           </form>
           <p>
@@ -102,7 +103,22 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <input type="text" placeholder='Digite seu email'   value={emailInputValue} onChange={(e) => setEmailInputValue(e.target.value)}/>
             <input type="text" placeholder='Digite seu usuario'   value={userInputValue} onChange={(e) => setUserInputValue(e.target.value)}/>
-            <input type="text" placeholder='Digite sua senha'   value={passwordInputValue} onChange={(e) => setPasswordInputValue(e.target.value)}/>
+            {/* <input type="password" placeholder='Digite sua senha'   value={passwordInputValue} onChange={(e) => setPasswordInputValue(e.target.value)}/> */}
+            <div className="senha-container">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder='Digite sua senha'
+              value={passwordInputValue}
+              onChange={(e) => setPasswordInputValue(e.target.value)}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="toggle-senha"
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </button>
+          </div>
             <input type="submit" value='Registrar' />
           </form>
           <p>

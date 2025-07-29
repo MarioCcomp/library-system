@@ -113,3 +113,25 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.senha-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.senha-container input {
+  flex: 1;
+  
+}
+
+.toggle-senha {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
