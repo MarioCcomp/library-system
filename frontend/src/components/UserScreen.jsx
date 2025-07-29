@@ -63,7 +63,7 @@ const UserScreen = () => {
     const [addBooks, setAddBooks] = useState(false);
 
  const handleMyBooks = () => {
-      setMyBooks(true);
+      setMyBooks(!myBooks);
       setAddBooks(false);
       setAllBooks(false);
     }
