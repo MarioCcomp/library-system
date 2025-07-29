@@ -2,6 +2,9 @@ package br.com.mario.library.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +17,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @NotBlank
+    @Column(unique = true)
     private String name;
 
+    @NotNull
+    @NotBlank
+    @Column(unique = true)
     private String email;
 
+    @NotNull
+    @NotBlank
     private String password;
 
 

@@ -2,6 +2,8 @@ package br.com.mario.library.controller;
 
 
 import br.com.mario.library.dto.AddBookDTO;
+import br.com.mario.library.dto.BookDTO;
+import br.com.mario.library.dto.LoginDTO;
 import br.com.mario.library.model.Book;
 import br.com.mario.library.model.User;
 import br.com.mario.library.service.UserService;
@@ -19,9 +21,9 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping(path = "/")
-    public List<User> findAll() {
-        return service.findAll();
+    @GetMapping()
+    public List<Book> findAllBooksFromUser(@RequestParam String name) {
+        return service.findAllBooksFromUser(name);
     }
 
     @PostMapping(path = "/registrar")
@@ -30,14 +32,14 @@ public class UserController {
     }
 
     @PostMapping(path = "/login")
-    public ResponseEntity<User> logar(@RequestBody User user) {
+    public ResponseEntity<User> logar(@RequestBody LoginDTO user) {
         return ResponseEntity.ok(service.logar(user));
     }
 
     @PostMapping(path = "/adicionarLivro")
-    public ResponseEntity<Book> adicionarLivro(@RequestBody AddBookDTO body) {
-        Book book = body.getBook();
-        User user = body.getUser();
+    public ResponseEntity<BookDTO> adicionarLivro(@RequestBody AddBookDTO body) {
+        BookDTO book = body.book();
+        LoginDTO user = body.user();
         service.adicionarLivro(book, user);
         return ResponseEntity.ok(book);
     }

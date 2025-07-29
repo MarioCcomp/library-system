@@ -22,4 +22,14 @@ public class BookService {
         return repository.findAll();
     }
 
+    public Book findByNameAndAuthor(String name, String author) {
+        Book book = repository.findByNameAndAuthor(name, author);
+
+        if(book == null) {
+            throw new IllegalArgumentException("Livro nao encontrado");
+        }
+
+        return book;
+    }
+
 }
